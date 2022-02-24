@@ -6,6 +6,10 @@ import Home from 'pages/Home/index';
 import Navbar from 'components/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "components/Footer";
+import ICO from "pages/ICO/index";
+import NewProposal from "pages/NewProposal/index";
+import AllProposals from "pages/AllProposals/index";
 
 function App() {
   return (
@@ -13,10 +17,16 @@ function App() {
       <Router>
 
         <Web3Provider>
-        <ToastContainer />
+          <ToastContainer />
 
           <Navbar />
-          <Home />
+          <Routes>
+            <Route path="/proposal/new" element={<NewProposal />} />
+            <Route path="/proposals" element={<AllProposals />} />
+            <Route path="/" element={<ICO />} />
+            <Route path="/" element={<ICO />} />
+          </Routes>
+          <Footer />
         </Web3Provider>
       </Router>
     </>
