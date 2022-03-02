@@ -4,6 +4,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { CreditCardIcon } from '@heroicons/react/solid'
 import Web3Context from "contexts/Web3Context";
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const user = {
@@ -13,8 +15,9 @@ const user = {
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-    { name: 'ICO', href: '#', current: true },
-    { name: 'Dashboard', href: '#', current: false },
+    { name: 'Docs', href: 'https://docs.naturedao.tech/', current: false },
+    { name: 'Team', link: '/team', current: false },
+    { name: 'FAQ', link: '/faq', current: false },
     // { name: 'Profile', href: '#', current: false },
     // { name: 'Calendar', href: '#', current: false },
 ]
@@ -28,14 +31,15 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
+export default function HomeNavbar() {
+    const navigate = useNavigate()
     const { connectWallet, account } = useContext(Web3Context)
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-white">
             {({ open }) => (
                 <>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex justify-between h-16">
+                        <div className="flex justify-between h-24">
                             <div className="flex">
                                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                                     {/* Mobile menu button */}
@@ -48,34 +52,52 @@ export default function Navbar() {
                                         )}
                                     </Disclosure.Button>
                                 </div>
-                                <div className="flex-shrink-0 font-extrabold text-white text-2xl flex items-center">
-                                    Nature DAO
+                                <div className="flex-shrink-0 font-extrabold  text-2xl flex items-center">
+                                    <Link
+                                        to="/">
+                                        <img src={"/nature_logo.png"} className='h-32 cursor-pointer' />
+                                    </Link>
                                 </div>
                                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-                                    {navigation.map((item) => (
-                                        <a
+                                    {navigation.map((item) => {
+                                        if (item.link) {
+                                            return (
+                                                <Link
+                                                    key={item.name}
+                                                    to={item.link}
+                                                    className={classNames(
+                                                        item.current ? '' : ' hover:bg-gray-300 ',
+                                                        'px-3 py-2 rounded-md text-sm font-medium'
+                                                    )}
+                                                    aria-current={item.current ? 'page' : undefined}
+                                                >
+                                                    {item.name}
+                                                </Link>
+                                            )
+                                        }
+                                        return (<a
                                             key={item.name}
                                             href={item.href}
+                                            target="_blank"
                                             className={classNames(
-                                                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                'px-3 py-2 rounded-md text-sm font-medium'
+                                                item.current ? 'cursor-pointer' : ' hover:bg-gray-300 ',
+                                                'px-3 py-2 cursor-pointer rounded-md text-sm font-medium'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
                                         >
                                             {item.name}
-                                        </a>
-                                    ))}
+                                        </a>)
+                                    })}
                                 </div>
                             </div>
                             <div className="flex items-center">
                                 <div className="hidden md:block flex-shrink-0">
                                     <button
-                                        onClick={() => connectWallet()}
+                                        onClick={() => navigate("/app")}
                                         type="button"
                                         className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500"
                                     >
-                                        <CreditCardIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-                                        <span>{account ? `${account.slice(0, 5)}...${account.slice(-5)}` : "Connect Wallet"}</span>
+                                        <span>Go to App</span>
                                     </button>
                                 </div>
                                 <div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
@@ -125,19 +147,36 @@ export default function Navbar() {
                     <Disclosure.Panel className="md:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navigation.map((item) => (
-                                <Disclosure.Button
-                                    key={item.name}
-                                    as="a"
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block px-3 py-2 rounded-md text-base font-medium'
-                                    )}
-                                    aria-current={item.current ? 'page' : undefined}
+                                <Link
+                                    to={item.link}
                                 >
-                                    {item.name}
-                                </Disclosure.Button>
+                                    <Disclosure.Button
+                                        key={item.name}
+                                        as="div"
+                                        href={item.href}
+                                        className={classNames(
+                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                            'block px-3 py-2 rounded-md text-base font-medium'
+                                        )}
+                                        aria-current={item.current ? 'page' : undefined}
+                                    >
+                                        {item.name}
+                                    </Disclosure.Button>
+                                </Link>
                             ))}
+                            <Disclosure.Button
+                                as="div"
+                                className={
+                                    'block px-3 py-2 rounded-md text-base font-medium'
+                                }
+                            >
+                                <button
+                                    onClick={() => navigate("/app")}
+                                    type="button"
+                                    className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500"
+                                >
+                                    <span>Go to App</span>
+                                </button>                            </Disclosure.Button>
                         </div>
                         <div className="pt-4 pb-3 border-t border-gray-700">
                             {/* <div className="flex items-center px-5 sm:px-6">

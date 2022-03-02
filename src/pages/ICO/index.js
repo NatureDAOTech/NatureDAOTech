@@ -2,7 +2,8 @@ import Web3Context from "contexts/Web3Context";
 import React, { useContext, useEffect, useState } from "react"
 export default function ICO() {
     const [amount, setAmount] = useState(0);
-    const { investDao, getBasePriceNDAO, checkIfPaused, account, baseCoinPrice } = useContext(Web3Context);
+    const { investDao, getBasePriceNDAO, checkIfPaused, account, baseCoinPrice, stats } = useContext(Web3Context);
+    console.log(stats);
     useEffect(() => {
         const doWork = async () => {
             const [isPaused, basePrice] = await Promise.all([checkIfPaused(), getBasePriceNDAO()]);
@@ -43,7 +44,7 @@ export default function ICO() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="max-w-4xl mx-auto text-center">
                             <h2 className="text-3xl font-extrabold text-black sm:text-4xl">
-                                ICO Title
+                                Nature DAO ICO
                             </h2>
                             <p className="mt-3 text-xl text-gray-700 sm:mt-4">
                                 ICO description
@@ -57,16 +58,16 @@ export default function ICO() {
                                 <div className="max-w-4xl mx-auto">
                                     <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
                                         <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
-                                            <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Stat1</dt>
-                                            <dd className="order-1 text-5xl font-extrabold text-green-600">100%</dd>
+                                            <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Base Price</dt>
+                                            <dd className="order-1 text-5xl font-extrabold text-green-600">{parseFloat(stats?.basePrice || "0").toFixed(4)}</dd>
                                         </div>
                                         <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                                            <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Stat2</dt>
-                                            <dd className="order-1 text-5xl font-extrabold text-green-600">24/7</dd>
+                                            <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Total Supply</dt>
+                                            <dd className="order-1 text-5xl font-extrabold text-green-600">{parseFloat(stats?.totalSupply || "0").toFixed(4)}{ }</dd>
                                         </div>
                                         <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                                            <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">Stat3</dt>
-                                            <dd className="order-1 text-5xl font-extrabold text-green-600">100k</dd>
+                                            <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">You Own</dt>
+                                            <dd className="order-1 text-5xl font-extrabold text-green-600">{parseFloat(stats?.balanceOf || "0").toFixed(4)}{ }</dd>
                                         </div>
                                     </dl>
                                 </div>
@@ -87,12 +88,12 @@ export default function ICO() {
                                     <input
                                         value={amount}
                                         onChange={(e) => {
-                                            if (/^\d+$/.test(e.target.value) || e.target.value === "") {
-                                                setAmount(parseFloat(e.target.value))
-                                            }
-                                            else {
+                                            // if (/^\d+$/.test(e.target.value) || e.target.value === "") {
+                                            setAmount(parseFloat(e.target.value))
+                                            // }
+                                            // else {
 
-                                            }
+                                            // }
                                         }}
                                         id="number"
                                         name="number"
@@ -101,6 +102,7 @@ export default function ICO() {
                                         required
                                         className="appearance-none text-5xl block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 "
                                     />
+                                    NDAO
                                 </div>
                             </div>
 
@@ -119,6 +121,7 @@ export default function ICO() {
                                         value={(parseFloat(parseFloat(amount) * parseFloat(baseCoinPrice)) / 1000000).toFixed(4)}
                                         className="appearance-none text-5xl block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 "
                                     />
+                                    USDT
                                 </div>
                             </div>
 

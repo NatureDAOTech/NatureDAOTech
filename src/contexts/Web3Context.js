@@ -3,8 +3,9 @@ import { ethers } from 'ethers';
 
 import icoAbi from "abis/ico.json";
 import usdtAbi from "abis/usdt.json"
+import ndaoAbi from "abis/ndao.json";
 import { Provider as MulticallProvider, Contract as MulticallContract } from "ethers-multicall";
-import { BigNumber } from "../../node_modules/ethers/lib/ethers";
+import { BigNumber, utils } from "../../node_modules/ethers/lib/ethers";
 import { toast } from 'react-toastify';
 import axios from "axios"
 
@@ -21,8 +22,10 @@ const MULTI_CALL_ADDRESS = "0xd078799c53396616844e2fa97f0dd2b4c145a685";
 const CHAIN_NAME = "Mumbai Testnet";
 const BASE_URL = "https://ndao-backend.herokuapp.com/proposal";
 
+
 const ICO_CONTRACT_ADDRESS = "0x5454135500073f29dcfb23f5bd6d6aac26b3cf95";
 const USDT_CONTRACT_ADDRESS = "0x6deb11bb8494ed72121f3ad19674ce495dbfe791";
+const NDAO_CONTRACT_ADDRESS = "0x6deb11bb8494ed72121f3ad19674ce495dbfe791";
 export const Web3Provider = (props) => {
 
     const [account, setAccount] = useState();
@@ -30,6 +33,8 @@ export const Web3Provider = (props) => {
     const [contractObjects, setContractObjects] = useState();
     const [baseCoinPrice, setBaseCoinPrice] = useState()
     const [isPaused, setIsPaused] = useState()
+    const [update, setUpdate] = useState(0);
+    const [stats, setStats] = useState({})
     const functionsToExport = {};
 
     const onAccountsChanged = async (accounts) => {
@@ -39,16 +44,23 @@ export const Web3Provider = (props) => {
         setSigner(_signer);
     }
     useEffect(() => {
+        if (account) {
+            calculateStats();
+        }
+    }, [account, update])
+    useEffect(() => {
         const _signer = signer || new ethers.providers.Web3Provider(
             window.ethereum,
             "any"
         );
         const icoContract = new ethers.Contract(ICO_CONTRACT_ADDRESS, icoAbi, _signer);
         const usdtContract = new ethers.Contract(USDT_CONTRACT_ADDRESS, usdtAbi, _signer);
+        const ndaoContract = new ethers.Contract(NDAO_CONTRACT_ADDRESS, ndaoAbi, _signer);
 
         const _contractObjects = {
             icoContract,
-            usdtContract
+            usdtContract,
+            ndaoContract
         }
         setContractObjects(_contractObjects);
     }, [signer])
@@ -114,10 +126,19 @@ export const Web3Provider = (props) => {
             ethereum.on('chainChanged', onChainChanged);
             ethereum.on('accountsChanged', onAccountsChanged);
             setAccount(accounts[0]);
+            toast.success("Wallet Connected!")
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const _signer = provider.getSigner();
             setSigner(_signer);
         }
+    }
+
+    const calculateStats = async () => {
+        const basePrice = parseInt((await contractObjects?.icoContract?.basePriceNDAO()).toString()) / 1000000.00;
+        const totalSupply = utils.formatEther((await contractObjects?.ndaoContract?.totalSupply()).toString());
+        const balanceOf = utils.formatEther((await contractObjects?.ndaoContract?.balanceOf(account)).toString());
+        setStats({ basePrice, totalSupply, balanceOf })
+
     }
     functionsToExport.getBasePriceNDAO = async () => {
         try {
@@ -148,27 +169,29 @@ export const Web3Provider = (props) => {
             const availableBalance = await contractObjects?.usdtContract.allowance(account, ICO_CONTRACT_ADDRESS);
             console.log(availableBalance)
             if (availableBalance.lt(requiredAmount)) {
-                toast(`Increasing Allowance for Plots (Placing Transaction)`)
+                toast.info(`Increasing Allowance for Plots (Placing Transaction)`)
                 console.log(requiredAmount.mul(100).toString())
 
                 const increaseBal = await contractObjects?.usdtContract.increaseAllowance(ICO_CONTRACT_ADDRESS, requiredAmount.toString());
                 const result = await increaseBal.wait()
 
             }
-            toast(`Placing Transaction`)
+            toast.info(`Placing Transaction`)
 
-            const newBattle = await contractObjects?.icoContract?.Invest(amount);
+            const newBattle = await contractObjects?.icoContract?.Invest(amount.toString());
             console.log(newBattle);
             console.log(newBattle.value.toString());
-            toast(`Transaction Placed`);
+            toast.info(`Transaction Placed`);
 
             const newBattleId = await newBattle.wait();
             console.log(newBattleId);
-            toast(`Transaction Successful!`);
+            toast.success(`Transaction Successful!`);
+            setUpdate(val => val + 1);
         }
         catch (e) {
             console.log(e)
-            toast(`Transaction Failed`)
+            toast.error(`Transaction Failed`)
+            setUpdate(val => val + 1);
 
         }
 
@@ -218,6 +241,10 @@ export const Web3Provider = (props) => {
         console.log(test);
         return [sign, account];
     }
+    functionsToExport.getAllProposals = async () => {
+        const allProposals = await axios.get(`${BASE_URL}/all`)
+        return (allProposals.data);
+    }
     functionsToExport.createProposal = async (proposalBody) => {
         try {
             proposalBody.amount = parseInt(proposalBody.amount);
@@ -241,10 +268,25 @@ export const Web3Provider = (props) => {
         }
     }
     functionsToExport.getProposals = async () => {
-        const resp = axios.get(`${BASE_URL}/all`);
-        console.log(resp);
+        try {
+            const resp = axios.get(`${BASE_URL}/all`);
+            console.log(resp);
+        }
+        catch (e) {
+            console.log(e.response.data)
+        }
     }
-    return (<Web3Context.Provider value={{ account, isPaused, baseCoinPrice, ...functionsToExport }}>
+    functionsToExport.approveProposal = async ({ proposal }) => {
+        try {
+            const [signature, address] = await levelSigner(proposal);
+            const result = await axios.post(`${BASE_URL}/approve`, { walletAddress: address, signature, proposalId: proposal.proposalId });
+            toast(`Proposal Approved!`)
+        }
+        catch (e) {
+            toast(`Proposal could not be Approved!`)
+        }
+    }
+    return (<Web3Context.Provider value={{ account, isPaused, baseCoinPrice, stats, ...functionsToExport }}>
         {props.children}
     </Web3Context.Provider>)
 }
