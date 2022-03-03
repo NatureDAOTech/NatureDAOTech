@@ -38,6 +38,9 @@ export default function HomeNavbar() {
         <Disclosure as="nav" className="bg-white">
             {({ open }) => (
                 <>
+                    <a href="https://docs.naturedao.tech/tokenomics-ndao-token" target={"_blank"} className="w-full">
+                        <div style={{ backgroundColor: "#E2FACF" }} className="cursor-pointer w-full py-2 font-bold text-lg  text-center">NDAO Token launch - April 2022</div>
+                    </a>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex justify-between h-24">
                             <div className="flex">
@@ -67,7 +70,7 @@ export default function HomeNavbar() {
                                                     to={item.link}
                                                     className={classNames(
                                                         item.current ? '' : ' hover:bg-gray-300 ',
-                                                        'px-3 py-2 rounded-md text-sm font-medium'
+                                                        'px-3 py-2 rounded-md text-md font-medium'
                                                     )}
                                                     aria-current={item.current ? 'page' : undefined}
                                                 >
@@ -81,7 +84,7 @@ export default function HomeNavbar() {
                                             target="_blank"
                                             className={classNames(
                                                 item.current ? 'cursor-pointer' : ' hover:bg-gray-300 ',
-                                                'px-3 py-2 cursor-pointer rounded-md text-sm font-medium'
+                                                'px-3 py-2 cursor-pointer rounded-md text-md font-medium'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
                                         >

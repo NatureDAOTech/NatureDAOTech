@@ -114,8 +114,7 @@ const Home = () => {
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <img src={"/nature_logo.png"} alt="" className="w-96" />
-            <img src={"/assets/nature_cycle.jpeg"} alt="" className="w-96" />
+            <img src={"/assets/nature_cycle.jpeg"} alt="" className="w-96 mt-16" />
             <div style={{ backgroundColor: "#E2FACF" }} className=" w-full p-8 mt-16 ">
                 <p className="mt-1 text-4xl w-full text-center font-semibold sm:tracking-tight ">
                     Mission
@@ -124,12 +123,14 @@ const Home = () => {
                     Bring non-governmental organizations (NGOs) and Charities working on nature restoration to Decentralize autonomous organization
                 </p>
                 <div className="flex mt-8 justify-center">
-                    <button
+                    <a
+                        target={"_blank"}
+                        href="https://discord.com/invite/APbfVTM5JV"
                         type="button"
                         className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500"
                     >
                         <span>Join Discord</span>
-                    </button>
+                    </a>
                 </div>
                 <p className="mt-20 text-4xl w-full text-center font-semibold sm:tracking-tight ">
                     Blockchain Problem and Solution
@@ -142,12 +143,14 @@ const Home = () => {
 
                 </p>
                 <div className="flex mt-8 justify-center">
-                    <button
+                    <a
+                        target={"_blank"}
+                        href="https://docs.naturedao.tech/"
                         type="button"
                         className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500"
                     >
                         <span>Read Docs</span>
-                    </button>
+                    </a>
                 </div>
             </div>
 

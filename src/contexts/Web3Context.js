@@ -23,9 +23,9 @@ const CHAIN_NAME = "Mumbai Testnet";
 const BASE_URL = "https://ndao-backend.herokuapp.com/proposal";
 
 
-const ICO_CONTRACT_ADDRESS = "0x5454135500073f29dcfb23f5bd6d6aac26b3cf95";
-const USDT_CONTRACT_ADDRESS = "0x6deb11bb8494ed72121f3ad19674ce495dbfe791";
-const NDAO_CONTRACT_ADDRESS = "0x6deb11bb8494ed72121f3ad19674ce495dbfe791";
+const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
+const USDT_CONTRACT_ADDRESS = "0x1D506F92737a9bdAfa8ef7Eb39167B0F2638929a";
+const NDAO_CONTRACT_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
 export const Web3Provider = (props) => {
 
     const [account, setAccount] = useState();
@@ -135,9 +135,9 @@ export const Web3Provider = (props) => {
 
     const calculateStats = async () => {
         const basePrice = parseInt((await contractObjects?.icoContract?.basePriceNDAO()).toString()) / 1000000.00;
-        const totalSupply = utils.formatEther((await contractObjects?.ndaoContract?.totalSupply()).toString());
+        const totalSupplyICO = utils.formatEther((await contractObjects?.ndaoContract?.balanceOf(ICO_CONTRACT_ADDRESS)).toString());
         const balanceOf = utils.formatEther((await contractObjects?.ndaoContract?.balanceOf(account)).toString());
-        setStats({ basePrice, totalSupply, balanceOf })
+        setStats({ basePrice, totalSupplyICO, balanceOf })
 
     }
     functionsToExport.getBasePriceNDAO = async () => {
@@ -164,21 +164,22 @@ export const Web3Provider = (props) => {
     }
     functionsToExport.investDao = async (amount) => {
         try {
+            console.log(baseCoinPrice);
             const requiredAmount = BigNumber.from(amount * baseCoinPrice);
             console.log(requiredAmount.toString())
             const availableBalance = await contractObjects?.usdtContract.allowance(account, ICO_CONTRACT_ADDRESS);
             console.log(availableBalance)
             if (availableBalance.lt(requiredAmount)) {
                 toast.info(`Increasing Allowance for Plots (Placing Transaction)`)
-                console.log(requiredAmount.mul(100).toString())
-
-                const increaseBal = await contractObjects?.usdtContract.increaseAllowance(ICO_CONTRACT_ADDRESS, requiredAmount.toString());
+                console.log(requiredAmount.mul(1000000).toString())
+                console.log((parseInt(parseFloat(requiredAmount) * 100)).toString());
+                const increaseBal = await contractObjects?.usdtContract.increaseAllowance(ICO_CONTRACT_ADDRESS, (parseFloat(requiredAmount) * 100).toString());
                 const result = await increaseBal.wait()
 
             }
             toast.info(`Placing Transaction`)
 
-            const newBattle = await contractObjects?.icoContract?.Invest(amount.toString());
+            const newBattle = await contractObjects?.icoContract?.Invest((parseInt(parseFloat(amount) * 100)).toString());
             console.log(newBattle);
             console.log(newBattle.value.toString());
             toast.info(`Transaction Placed`);
