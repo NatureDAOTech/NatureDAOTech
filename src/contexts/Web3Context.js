@@ -49,20 +49,25 @@ export const Web3Provider = (props) => {
         }
     }, [account, update])
     useEffect(() => {
-        const _signer = signer || new ethers.providers.Web3Provider(
-            window.ethereum,
-            "any"
-        );
-        const icoContract = new ethers.Contract(ICO_CONTRACT_ADDRESS, icoAbi, _signer);
-        const usdtContract = new ethers.Contract(USDT_CONTRACT_ADDRESS, usdtAbi, _signer);
-        const ndaoContract = new ethers.Contract(NDAO_CONTRACT_ADDRESS, ndaoAbi, _signer);
+        try {
+            const _signer = signer || new ethers.providers.Web3Provider(
+                window.ethereum,
+                "any"
+            );
+            const icoContract = new ethers.Contract(ICO_CONTRACT_ADDRESS, icoAbi, _signer);
+            const usdtContract = new ethers.Contract(USDT_CONTRACT_ADDRESS, usdtAbi, _signer);
+            const ndaoContract = new ethers.Contract(NDAO_CONTRACT_ADDRESS, ndaoAbi, _signer);
 
-        const _contractObjects = {
-            icoContract,
-            usdtContract,
-            ndaoContract
+            const _contractObjects = {
+                icoContract,
+                usdtContract,
+                ndaoContract
+            }
+            setContractObjects(_contractObjects);
         }
-        setContractObjects(_contractObjects);
+        catch (e) {
+            console.log(e)
+        }
     }, [signer])
     const addNewChain = async () => {
         await window.ethereum.request({
@@ -116,7 +121,10 @@ export const Web3Provider = (props) => {
 
     }
     functionsToExport.connectWallet = async (defaultAccount = -1) => {
-
+        if (!signer) {
+            toast.error("You need a wallet to continue!");
+            return
+        }
         const { ethereum } = window
 
         if (ethereum) {

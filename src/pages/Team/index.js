@@ -3,7 +3,7 @@ const people = [
         name: 'Sunil Patil - Founder',
         role: 'Concept refinement and execution',
         imageUrl:
-            '/assets/sunilPatil.webp',
+            '/sunilPatil.webp',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -11,7 +11,7 @@ const people = [
         name: 'Hetal Shah - Co-founder',
         role: 'Finance, Taxation, and Fiat Handling',
         imageUrl:
-            '/assets/hetalShah.jpeg',
+            '/hetalShah.jpeg',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -19,7 +19,7 @@ const people = [
         name: 'Arnab Ray',
         role: 'Blockchain Developer',
         imageUrl:
-            '/assets/arnabRay.jpeg',
+            '/arnabRay.jpeg',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -27,7 +27,7 @@ const people = [
         name: 'Ace Vikings',
         role: 'Blockchain Developer',
         imageUrl:
-            '/assets/aceVikings.jpeg',
+            '/aceVikings.jpeg',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -35,7 +35,7 @@ const people = [
         name: 'Anik Ghosh',
         role: 'Blockchain Developer',
         imageUrl:
-            '/assets/anikGhosh.jpeg',
+            '/anikGhosh.jpeg',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -43,7 +43,7 @@ const people = [
         name: 'Anshuman Singh',
         role: 'Web3 Frontend / Backend Developer',
         imageUrl:
-            '/assets/anshumanSingh.jpeg',
+            '/anshumanSingh.jpeg',
         twitterUrl: '#',
         linkedinUrl: '#',
     },
@@ -51,7 +51,7 @@ const people = [
         name: 'Soumojit Ash',
         role: 'Web3 Frontend / Backend Developer',
         imageUrl:
-            '/assets/soumojitGhosh.jpeg',
+            '/soumojitGhosh.jpeg',
         twitterUrl: '#',
         linkedinUrl: '#',
     },

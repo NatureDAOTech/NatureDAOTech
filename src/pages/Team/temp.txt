@@ -1,0 +1,59 @@
+const people = [
+    {
+        name: 'Sunil Patil - Founder',
+        role: 'Concept refinement and execution',
+        imageUrl:
+            '/assets/sunilPatil.webp',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Hetal Shah - Co-founder',
+        role: 'Finance, Taxation, and Fiat Handling',
+        imageUrl:
+            '/assets/hetalShah.jpeg',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Arnab Ray',
+        role: 'Blockchain Developer',
+        imageUrl:
+            '12--wlwtZ7lzYHmk7_R2PjwmgViipsIOc',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Ace Vikings',
+        role: 'Blockchain Developer',
+        imageUrl:
+            '128D-6lqfOOAlhKzLqLaAzKfFoNjROo9S',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Anik Ghosh',
+        role: 'Blockchain Developer',
+        imageUrl:
+            '128zl85MvG5VHNL-_Ba4H4n5yYN88xt0w',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Anshuman Singh',
+        role: 'Web3 Frontend / Backend Developer',
+        imageUrl:
+            '12AgMHQ_GlsUes8CAdg-ABn95twVlDY3R',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    {
+        name: 'Soumojit Ash',
+        role: 'Web3 Frontend / Backend Developer',
+        imageUrl:
+            '12AzoB6h2mPAsdeqFxvJWPpeGA5CLO_pm',
+        twitterUrl: '#',
+        linkedinUrl: '#',
+    },
+    // More people...
+]
