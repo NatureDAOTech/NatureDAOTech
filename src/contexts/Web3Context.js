@@ -121,11 +121,12 @@ export const Web3Provider = (props) => {
 
     }
     functionsToExport.connectWallet = async (defaultAccount = -1) => {
-        if (!signer) {
+        const { ethereum } = window
+
+        if (!ethereum) {
             toast.error("You need a wallet to continue!");
             return
         }
-        const { ethereum } = window
 
         if (ethereum) {
             await ethereum.request({ method: 'eth_requestAccounts' });
