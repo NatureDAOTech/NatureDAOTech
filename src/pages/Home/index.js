@@ -114,7 +114,7 @@ const Home = () => {
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <img src={"/assets/nature_cycle.jpeg"} alt="" className="w-96 mt-16" />
+            <img src={"/nature_cycle.jpeg"} alt="" className="w-96 mt-16" />
             <div style={{ backgroundColor: "#E2FACF" }} className=" w-full p-8 mt-16 ">
                 <p className="mt-1 text-4xl w-full text-center font-semibold sm:tracking-tight ">
                     Mission
