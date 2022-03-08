@@ -23,9 +23,9 @@ const CHAIN_NAME = "Mumbai Testnet";
 const BASE_URL = "https://ndao-backend.herokuapp.com/proposal";
 
 
-const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
-const USDT_CONTRACT_ADDRESS = "0x1D506F92737a9bdAfa8ef7Eb39167B0F2638929a";
-const NDAO_CONTRACT_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
+export const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
+export const USDT_CONTRACT_ADDRESS = "0x1D506F92737a9bdAfa8ef7Eb39167B0F2638929a";
+export const NDAO_CONTRACT_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
 export const Web3Provider = (props) => {
 
     const [account, setAccount] = useState();
@@ -206,6 +206,15 @@ export const Web3Provider = (props) => {
         }
 
     }
+    const encodeSinger = async (functionName, parameters) => {
+        //let ABI = ["function mint(uint amount) external"];
+        let iface = new ethers.utils.Interface(ndaoAbi);
+        const n = await iface.encodeFunctionData(functionName, parameters);
+        console.log(n);
+        return n;
+    };
+
+
     const levelSigner = async (newVal) => {
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -214,21 +223,21 @@ export const Web3Provider = (props) => {
             name: "NDAO",
             version: "1",
             chainId: 80001,
-            verifyingContract: '0xA710BfA9D9E9a4fe7c5b3520c0D73A94077156C6'
+            verifyingContract: "0xcA9cf0FA30D87411a660Eb679d10B4d800028Ed1"
         };
         const types = {
             Signer: [
                 { name: "proposalId", type: "uint256" },
                 { name: "contractAddress", type: "address" },
-                { name: "amount", type: "uint256" },
-                { name: "receiver", type: "address" }
+                { name: "functionCall", type: "bytes" }
             ]
         };
+        const functionCall = ethers.utils.arrayify(await encodeSinger(newVal.functionName, newVal.parameters))
         const value = {
             proposalId: newVal.proposalId,
             contractAddress: newVal.contractAddress,
-            amount: newVal.amount,
-            receiver: newVal.receiver,
+            functionCall: functionCall
+
         }
         // const value = {
         //     proposalId: 1,
@@ -249,7 +258,7 @@ export const Web3Provider = (props) => {
         console.log(sign);
         let test = await ethers.utils.verifyTypedData(domain, types, value, sign);
         console.log(test);
-        return [sign, account];
+        return [sign, account, functionCall];
     }
     functionsToExport.getAllProposals = async () => {
         const allProposals = await axios.get(`${BASE_URL}/all`)
@@ -263,7 +272,8 @@ export const Web3Provider = (props) => {
             const count = countRequest.data.count + 1;
             console.log(count)
             proposalBody.proposalId = count;
-            const [signature, address] = await levelSigner(proposalBody);
+            const [signature, address, functionCall] = await levelSigner(proposalBody);
+            proposalBody.functionCall = functionCall
             proposalBody.signature = signature;
             proposalBody.walletAddress = account;
             console.log(proposalBody)
@@ -288,7 +298,7 @@ export const Web3Provider = (props) => {
     }
     functionsToExport.approveProposal = async ({ proposal }) => {
         try {
-            const [signature, address] = await levelSigner(proposal);
+            const [signature, address, functionSigner] = await levelSigner(proposal);
             const result = await axios.post(`${BASE_URL}/approve`, { walletAddress: address, signature, proposalId: proposal.proposalId });
             toast(`Proposal Approved!`)
         }

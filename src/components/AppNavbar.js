@@ -130,24 +130,39 @@ export default function AppNavbar() {
 
                     <Disclosure.Panel className="md:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            {navigation.map((item) => (
-                                <Link
-                                    to={item.link}
-                                >
-                                    <Disclosure.Button
-                                        key={item.name}
-                                        as="div"
-                                        href={item.href}
-                                        className={classNames(
-                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                            'block px-3 py-2 rounded-md text-base font-medium'
-                                        )}
-                                        aria-current={item.current ? 'page' : undefined}
-                                    >
-                                        {item.name}
-                                    </Disclosure.Button>
-                                </Link>
-                            ))}
+                            {navigation.map((item) => {
+                                {
+                                    navigation.map((item) => {
+                                        if (item.link) {
+                                            return (
+                                                <Link
+                                                    key={item.name}
+                                                    to={item.link}
+                                                    className={classNames(
+                                                        item.current ? 'bg-gray-300 text-white' : 'text-gray-700 hover:bg-gray-300 hover:text-white',
+                                                        'block px-3 py-2 rounded-md text-base font-medium'
+                                                    )}
+                                                    aria-current={item.current ? 'page' : undefined}
+                                                >
+                                                    {item.name}
+                                                </Link>
+                                            )
+                                        }
+                                        return (<a
+                                            key={item.name}
+                                            href={item.href}
+                                            target="_blank"
+                                            className={classNames(
+                                                item.current ? 'bg-gray-300 text-white' : 'text-gray-700 hover:bg-gray-300 hover:text-white',
+                                                'block px-3 py-2 rounded-md text-base font-medium'
+                                            )}
+                                            aria-current={item.current ? 'page' : undefined}
+                                        >
+                                            {item.name}
+                                        </a>)
+                                    })
+                                }
+                            })}
                             <Disclosure.Button
                                 as="div"
                                 className={
