@@ -4,23 +4,23 @@ const people = [
         role: 'Concept refinement and execution',
         imageUrl:
             '/sunilPatil.png',
-        twitterUrl: '#',
-        linkedinUrl: '#',
+        twitterUrl: 'https://twitter.com/NatureDAOTech',
+        linkedinUrl: 'https://www.linkedin.com/in/sunil-patil-18bb081a',
     },
     {
         name: 'Hetal Shah - Co-founder',
         role: 'Finance, Taxation, and Fiat Handling',
         imageUrl:
             '/hetalShah.png',
-        twitterUrl: '#',
-        linkedinUrl: '#',
+        twitterUrl: 'https://twitter.com/HetalSh4h',
+        linkedinUrl: 'https://www.linkedin.com/in/hetalushah',
     },
     {
         name: 'Arnab Ray',
         role: 'Blockchain Developer',
         imageUrl:
             '/arnabRay.png',
-        twitterUrl: '#',
+        twitterUrl: 'https://twitter.com/ArnabRa00302147',
         linkedinUrl: '#',
     },
     {
@@ -28,7 +28,7 @@ const people = [
         role: 'Blockchain Developer',
         imageUrl:
             '/aceVikings.png',
-        twitterUrl: '#',
+        twitterUrl: 'https://twitter.com/vikings_ace',
         linkedinUrl: '#',
     },
     {
@@ -36,7 +36,7 @@ const people = [
         role: 'Blockchain Developer',
         imageUrl:
             '/anikGhosh.png',
-        twitterUrl: '#',
+        twitterUrl: 'https://twitter.com/ItsmeNick30',
         linkedinUrl: '#',
     },
     {
@@ -44,7 +44,7 @@ const people = [
         role: 'Web3 Frontend / Backend Developer',
         imageUrl:
             '/anshumanSingh.png',
-        twitterUrl: '#',
+        twitterUrl: 'https://twitter.com/notAcadia',
         linkedinUrl: '#',
     },
     {
@@ -52,7 +52,7 @@ const people = [
         role: 'Web3 Frontend / Backend Developer',
         imageUrl:
             '/soumojitGhosh.png',
-        twitterUrl: '#',
+        twitterUrl: 'https://twitter.com/SoumojitAsh',
         linkedinUrl: '#',
     },
     // More people...
