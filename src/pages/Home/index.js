@@ -1,121 +1,14 @@
 import Web3Context from "contexts/Web3Context";
 import { useContext, useEffect, useState, Fragment } from "react";
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-const DURATION = [300, 600, 1800, 3600];
-const COLOR = ["Blue", "Red"]
+
 const Home = () => {
-    const { account, createBattle,
-        joinBattle, getArbTokenBalance,
-        getAllHarmonyWhales, listenToCreatedBattles,
-        listenToWonBattles, listenToCanceledBattles,
-        listenToAcceptedBattles, cancelBattle
-    } = useContext(Web3Context);
-    const [createBattleForm, setCreateBattleForm] = useState({
-        whaleId: "",
-        amount: "10",
-        color: 0,
-        duration: 300,
-
-    })
-    const [createWhaleMetadata, setCreateWhaleMetadata] = useState();
-    const [joinWhaleMetadata, setJoinWhaleMetadata] = useState();
-    const [createdBattles, setCreatedBattles] = useState([]);
-    const [battlesToJoin, setBattlesToJoin] = useState([]);
-    const [battlesWon, setBattlesWon] = useState([]);
-    const [joinBattleForm, setJoinBattleForm] = useState({
-        battleId: "",
-        whaleId: "",
-    });
-    const [arbTokenBalance, setArbTokenBalance] = useState("Loading...");
-    const [harmonyWhales, setHarmonyWhales] = useState(undefined);
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
-    const food = ["Donuts", "Goldfish", "Shrimpo", "Steak"];
-    useEffect(() => {
-        const fetchStuff = async () => {
-            getArbTokenBalance().then(res => setArbTokenBalance(res)).catch(e => setArbTokenBalance("Failed to Fetch Token Balance"));
-            getAllHarmonyWhales().then(res => {
-                setHarmonyWhales(res)
-                setCreateBattleForm({ ...createBattleForm, whaleId: res[0] });
-                setJoinBattleForm({ ...joinBattleForm, whaleId: res[0] });
-            }).catch(e => { setHarmonyWhales([]) });
-            listenToCreatedBattles(handleOnCreateBattle);
-            listenToCreatedBattles(handleOnCreateOwnBattle, true);
-            listenToWonBattles(handleOnWinBattle);
-            listenToCanceledBattles(handleOnCancelledBattle);
-            listenToAcceptedBattles(handleOnJoinedBattle);
-
-        }
-        if (account) {
-            fetchStuff();
-        }
-    }, [account])
-    const handleOnWinBattle = async (data) => {
-        console.log(data.battleId + ":WOn")
-        if (battlesWon.filter((e) => e.battleId === data.battleId).length === 0) {
-            let _newCreatedBattle = [...battlesWon]
-            _newCreatedBattle.push(data);
-            setBattlesWon((e) => ([...e, data]));
-        }
-    }
-
-    const handleOnCreateBattle = async (data) => {
-        console.log("created Battle:" + data.battleId);
-        if (battlesToJoin.filter((e) => e.battleId === data.battleId).length === 0) {
-            let _newCreatedBattle = [...battlesToJoin, data]
-
-            setBattlesToJoin((e) => ([...e, data]));
-
-        }
-        console.log(data);
-    }
-    const handleOnCancelledBattle = async (data) => {
-        setBattlesToJoin((battlesToJoin) => battlesToJoin.filter((e) => e.battleId !== data.battleId));
-        setCreatedBattles((createdBattles) => createdBattles.filter((e) => e.battleId !== data.battleId));
-
-    }
-    const handleOnJoinedBattle = async (data) => {
-        console.log("jonied battle: " + data.battleId);
-        setBattlesToJoin((battlesToJoin) => battlesToJoin.filter((e) => e.battleId !== data.battleId));
-        setCreatedBattles((createdBattles) => createdBattles.filter((e) => e.battleId !== data.battleId));
-    }
-    const handleOnCreateOwnBattle = async (data) => {
-        if (createdBattles.filter((e) => e.battleId === data.battleId).length === 0) {
-            let _newCreatedBattle = [...createdBattles]
-            _newCreatedBattle.push(data);
-            setCreatedBattles((e) => ([...e, data]));
-        }
-        console.log(data);
-    }
-    const handleCreateBattleChange = (field, value) => {
-        const _createBattleForm = { ...createBattleForm };
-        _createBattleForm[field] = value;
-        setCreateBattleForm(_createBattleForm);
-
-    }
-    const handleJoinBattleChange = (field, value) => {
-        const _joinBattleForm = { ...joinBattleForm };
-        _joinBattleForm[field] = value;
-        setJoinBattleForm(_joinBattleForm);
-    }
-
-    const handleCreateBattle = async () => {
-        console.log(createBattleForm)
-        createBattle(createBattleForm);
-    }
-    const handleJoinBattle = async (battleId, amount) => {
-        joinBattle({ ...joinBattleForm, battleId, amount });
-    }
-    const handleCancelBattle = async (battleId) => {
-        await cancelBattle(battleId);
-    }
+   
+  
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <img src={"/nature_cycle.png"} alt="" className="w-96 mt-16" />
-            <div style={{ backgroundColor: "#E2FACF" }} className=" w-full p-8 mt-16 ">
+            <img src={"/nature_cycle.png"} alt="" className="max-w-xl p-4 lg:p-0 w-full" />
+            <div style={{ backgroundColor: "#E2FACF" }} className=" w-full p-8 mt-8 ">
                 <p className="mt-1 text-4xl w-full text-center font-semibold sm:tracking-tight ">
                     Mission
                 </p>

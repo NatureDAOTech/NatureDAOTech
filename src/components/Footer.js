@@ -1,14 +1,14 @@
 /* This example requires Tailwind CSS v2.0+ */
 const navigation = {
     main: [
-        { name: 'Home', href: '#' },
+        { name: 'Home', link: '/' },
         { name: 'Docs', href: 'https://docs.naturedao.tech/' },
         // { name: 'Github', href: '#' },
         // { name: 'Medium', href: '#' },
         // { name: 'Discord', href: '#' },
         // { name: 'Twitter', href: '#' },
-        { name: 'Team', href: '/team' },
-        { name: 'FAQs', href: '/faq' },
+        { name: 'Team', link: '/team' },
+        { name: 'FAQs', link: '/faq' },
     ],
     social: [
 
@@ -66,7 +66,7 @@ export default function Footer() {
                 <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
                     {navigation.main.map((item) => (
                         <div key={item.name} className="px-5 py-2">
-                            <a target={"_blank"} href={item.href} className="text-lg text-white hover:text-gray-900">
+                            <a target={item.href?"_blank":""} href={item.href||item.link} className="text-lg text-white hover:text-gray-900">
                                 {item.name}
                             </a>
                         </div>

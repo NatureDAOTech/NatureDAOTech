@@ -21,7 +21,7 @@ const people = [
         imageUrl:
             '/arnabRay.png',
         twitterUrl: 'https://twitter.com/ArnabRa00302147',
-        linkedinUrl: '#',
+        githubUrl: 'https://github.com/Arnab11917676',
     },
     {
         name: 'Ace Vikings',
@@ -29,7 +29,7 @@ const people = [
         imageUrl:
             '/aceVikings.png',
         twitterUrl: 'https://twitter.com/vikings_ace',
-        linkedinUrl: '#',
+        githubUrl: 'https://github.com/AceVikings',
     },
     {
         name: 'Anik Ghosh',
@@ -37,15 +37,15 @@ const people = [
         imageUrl:
             '/anikGhosh.png',
         twitterUrl: 'https://twitter.com/ItsmeNick30',
-        linkedinUrl: '#',
+        githubUrl: 'https://github.com/AnikCodz',
     },
     {
-        name: 'Anshuman Singh',
+        name: 'Mysterious Acadia',
         role: 'Web3 Frontend / Backend Developer',
         imageUrl:
-            '/anshumanSingh.png',
+            '/mysteriousAcadia.png',
         twitterUrl: 'https://twitter.com/notAcadia',
-        linkedinUrl: '#',
+        githubUrl: 'https://github.com/MysteriousAcadia',
     },
     {
         name: 'Soumojit Ash',
@@ -53,7 +53,7 @@ const people = [
         imageUrl:
             '/soumojitGhosh.png',
         twitterUrl: 'https://twitter.com/SoumojitAsh',
-        linkedinUrl: '#',
+        githubUrl: 'https://github.com/Soumojit28',
     },
     // More people...
 ]
@@ -82,17 +82,24 @@ export default function Team() {
                                         </div>
                                         <ul role="list" className="flex justify-center space-x-5">
                                             <li>
-                                                <a href={person.twitterUrl} className="text-gray-400 hover:text-gray-500">
+                                                <a target={"_blank"} href={person.twitterUrl} className="text-gray-400 hover:text-gray-500">
                                                     <span className="-only">Twitter</span>
 
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href={person.linkedinUrl} className="text-gray-400 hover:text-gray-500">
+                                            {person.linkedinUrl?                                           <li>
+                                                <a target={"_blank"} href={person.linkedinUrl} className="text-gray-400 hover:text-gray-500">
                                                     <span className="-only">LinkedIn</span>
 
                                                 </a>
                                             </li>
+                                            :<li>
+                                            <a target={"_blank"} href={person.githubUrl} className="text-gray-400 hover:text-gray-500">
+                                                <span className="-only">Github</span>
+
+                                            </a>
+                                        </li>
+}
                                         </ul>
                                     </div>
                                 </div>

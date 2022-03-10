@@ -26,6 +26,7 @@ const BASE_URL = "https://ndao-backend.herokuapp.com/proposal";
 export const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
 export const USDT_CONTRACT_ADDRESS = "0x1D506F92737a9bdAfa8ef7Eb39167B0F2638929a";
 export const NDAO_CONTRACT_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
+export const NDAO_TREASURY_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
 export const Web3Provider = (props) => {
 
     const [account, setAccount] = useState();
@@ -179,7 +180,7 @@ export const Web3Provider = (props) => {
             const availableBalance = await contractObjects?.usdtContract.allowance(account, ICO_CONTRACT_ADDRESS);
             console.log(availableBalance)
             if (availableBalance.lt(requiredAmount)) {
-                toast.info(`Increasing Allowance for Plots (Placing Transaction)`)
+                toast.info(`Increasing Allowance for ICO (Placing Transaction)`)
                 console.log(requiredAmount.mul(1000000).toString())
                 console.log((parseInt(parseFloat(requiredAmount) * 100)).toString());
                 const increaseBal = await contractObjects?.usdtContract.increaseAllowance(ICO_CONTRACT_ADDRESS, (parseFloat(requiredAmount) * 100).toString());
@@ -188,13 +189,13 @@ export const Web3Provider = (props) => {
             }
             toast.info(`Placing Transaction`)
 
-            const newBattle = await contractObjects?.icoContract?.Invest((parseInt(parseFloat(amount) * 100)).toString());
-            console.log(newBattle);
-            console.log(newBattle.value.toString());
+            const transaction = await contractObjects?.icoContract?.Invest((parseInt(parseFloat(amount) * 100)).toString());
+            console.log(transaction);
+            console.log(transaction.value.toString());
             toast.info(`Transaction Placed`);
 
-            const newBattleId = await newBattle.wait();
-            console.log(newBattleId);
+            const transactionHash = await transaction.wait();
+            console.log(transactionHash);
             toast.success(`Transaction Successful!`);
             setUpdate(val => val + 1);
         }
@@ -209,6 +210,7 @@ export const Web3Provider = (props) => {
     const encodeSinger = async (functionName, parameters) => {
         //let ABI = ["function mint(uint amount) external"];
         let iface = new ethers.utils.Interface(ndaoAbi);
+        console.log(functionName,parameters)
         const n = await iface.encodeFunctionData(functionName, parameters);
         console.log(n);
         return n;
@@ -223,22 +225,28 @@ export const Web3Provider = (props) => {
             name: "NDAO",
             version: "1",
             chainId: 80001,
-            verifyingContract: "0xcA9cf0FA30D87411a660Eb679d10B4d800028Ed1"
+            verifyingContract: "0x4b7550803cFbe3659491DfF6896DB8D0ba58f612"
         };
         const types = {
             Signer: [
                 { name: "proposalId", type: "uint256" },
                 { name: "contractAddress", type: "address" },
-                { name: "functionCall", type: "bytes" }
+                { name: "functionCall", type: "bytes" },
+                { name: "gas", type: "uint256" },
+                { name: "amount", type: "uint256" },
             ]
         };
-        const functionCall = ethers.utils.arrayify(await encodeSinger(newVal.functionName, newVal.parameters))
+        console.log(newVal)
+        const functionCall = ethers.utils.arrayify(await encodeSinger(newVal.functionType.name, newVal.functionParams))
         const value = {
             proposalId: newVal.proposalId,
             contractAddress: newVal.contractAddress,
-            functionCall: functionCall
+            functionCall: functionCall,
+            amount:"0",
+            gas:"5000"
 
         }
+        console.log(value)
         // const value = {
         //     proposalId: 1,
         //     contractAddress: "0x9a53d2E5497468eD2569E7D8d7eD9b1379Fb2c05",
@@ -265,27 +273,25 @@ export const Web3Provider = (props) => {
         return (allProposals.data);
     }
     functionsToExport.createProposal = async (proposalBody) => {
-        try {
             proposalBody.amount = parseInt(proposalBody.amount);
             console.log(proposalBody);
-            const countRequest = await axios.get(`${BASE_URL}/count`);
-            const count = countRequest.data.count + 1;
+            // const countRequest = await axios.get(`${BASE_URL}/count`);
+            const count = 0;
+            // const count = countRequest.data.count + 1;
             console.log(count)
             proposalBody.proposalId = count;
             const [signature, address, functionCall] = await levelSigner(proposalBody);
             proposalBody.functionCall = functionCall
             proposalBody.signature = signature;
             proposalBody.walletAddress = account;
+            proposalBody.functionName = proposalBody?.functionType?.name
+            
             console.log(proposalBody)
             const result = await axios.post(`${BASE_URL}/new`, proposalBody);
             toast(`Proposal Created!`)
 
-        }
-        catch (e) {
-            console.log(e)
-            toast(`Transaction Failed`)
-
-        }
+        
+     
     }
     functionsToExport.getProposals = async () => {
         try {
