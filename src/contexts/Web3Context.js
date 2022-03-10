@@ -20,7 +20,7 @@ const NATIVE_CURRENCY = {
 }
 const MULTI_CALL_ADDRESS = "0xd078799c53396616844e2fa97f0dd2b4c145a685";
 const CHAIN_NAME = "Mumbai Testnet";
-const BASE_URL = "https://ndao-backend.herokuapp.com/proposal";
+const BASE_URL = "http://ndao.iamvoidop.com:3000/proposal";
 
 
 export const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
@@ -275,15 +275,17 @@ export const Web3Provider = (props) => {
     functionsToExport.createProposal = async (proposalBody) => {
             proposalBody.amount = parseInt(proposalBody.amount);
             console.log(proposalBody);
-            // const countRequest = await axios.get(`${BASE_URL}/count`);
-            const count = 0;
-            // const count = countRequest.data.count + 1;
+            const countRequest = await axios.get(`${BASE_URL}/count`);
+            // const count = 0;
+            const count = countRequest.data.count + 1;
             console.log(count)
             proposalBody.proposalId = count;
             const [signature, address, functionCall] = await levelSigner(proposalBody);
             proposalBody.functionCall = functionCall
             proposalBody.signature = signature;
             proposalBody.walletAddress = account;
+            proposalBody.amount = "0";
+            proposalBody.gas = "5000";
             proposalBody.functionName = proposalBody?.functionType?.name
             
             console.log(proposalBody)
