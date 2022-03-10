@@ -20,7 +20,7 @@ const NATIVE_CURRENCY = {
 }
 const MULTI_CALL_ADDRESS = "0xd078799c53396616844e2fa97f0dd2b4c145a685";
 const CHAIN_NAME = "Mumbai Testnet";
-const BASE_URL = "http://ndao.iamvoidop.com:3000/proposal";
+const BASE_URL = "http://localhost:5000/proposal";
 
 
 export const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
@@ -225,25 +225,27 @@ export const Web3Provider = (props) => {
             name: "NDAO",
             version: "1",
             chainId: 80001,
-            verifyingContract: "0x4b7550803cFbe3659491DfF6896DB8D0ba58f612"
+            verifyingContract: "0x23F9c5478d0F56a3566dbb671080217dEde570CB"
         };
         const types = {
             Signer: [
                 { name: "proposalId", type: "uint256" },
                 { name: "contractAddress", type: "address" },
-                { name: "functionCall", type: "bytes" },
-                { name: "gas", type: "uint256" },
                 { name: "amount", type: "uint256" },
+                { name: "gas", type: "uint256" },
+                { name: "functionCall", type: "bytes" },
             ]
         };
         console.log(newVal)
+        console.log('encoded function',)
         const functionCall = ethers.utils.arrayify(await encodeSinger(newVal.functionType.name, newVal.functionParams))
         const value = {
             proposalId: newVal.proposalId,
             contractAddress: newVal.contractAddress,
-            functionCall: functionCall,
-            amount:"0",
-            gas:"5000"
+            amount:0,
+            gas:5000,
+            functionCall: functionCall
+            
 
         }
         console.log(value)
@@ -284,8 +286,8 @@ export const Web3Provider = (props) => {
             proposalBody.functionCall = functionCall
             proposalBody.signature = signature;
             proposalBody.walletAddress = account;
-            proposalBody.amount = "0";
-            proposalBody.gas = "5000";
+            proposalBody.amount = 0;
+            proposalBody.gas = 5000;
             proposalBody.functionName = proposalBody?.functionType?.name
             
             console.log(proposalBody)
