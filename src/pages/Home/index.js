@@ -7,13 +7,14 @@ const Home = () => {
   
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <img src={"/nature_cycle.png"} alt="" className="max-w-xl p-4 lg:p-0 w-full" />
+            <img src={"/nature_cycle.png"} alt="" className="max-w-xl p-4 lg:p-0 w-full" />            
+                    "Nature Conservation" To "Earn "
             <div style={{ backgroundColor: "#E2FACF" }} className=" w-full p-8 mt-8 ">
                 <p className="mt-1 text-4xl w-full text-center font-semibold sm:tracking-tight ">
                     Mission
                 </p>
                 <p className="max-w-5xl text-center mt-5 mx-auto text-lg text-gray-800">
-                    Bring non-governmental organizations (NGOs) and Charities working on nature restoration to Decentralize autonomous organization
+                    Bring non-governmental organizations (NGOs) and Charities working on nature restoration to Decentralize autonomous organization to access DeFi
                 </p>
                 <div className="flex mt-8 justify-center">
                     <a
@@ -30,9 +31,9 @@ const Home = () => {
 
                 </p>
                 <p className="max-w-5xl text-center mt-5 mx-auto text-lg text-gray-800">
-                    <b> Problem:</b> High Energy consumption and centralization of miners and validators
+                    <b> Problem:</b> High Energy consumption and centralization of miners and validators in cold and developed countries
                     <br />
-                    <b>Solutions:</b> Renewables and decentralization on hot and developing countries
+                    <b>Solutions:</b> Renewables and decentralization in hot and developing countries
 
                 </p>
                 <div className="flex mt-8 justify-center">
