@@ -11,22 +11,22 @@ import axios from "axios"
 
 const Web3Context = createContext();
 
-const RPC_URL = "https://rpc-mumbai.matic.today";
-const CHAIN_ID = 80001;
+const RPC_URL = "https://polygon-rpc.com/";
+const CHAIN_ID = 137;
 const NATIVE_CURRENCY = {
     name: "MATIC",
     symbol: "MATIC", // 2-6 characters long
     decimals: 18,
 }
 const MULTI_CALL_ADDRESS = "0xd078799c53396616844e2fa97f0dd2b4c145a685";
-const CHAIN_NAME = "Mumbai Testnet";
+const CHAIN_NAME = "Polygon Mainnet";
 const BASE_URL = "http://localhost:5000/proposal";
 
 
-export const ICO_CONTRACT_ADDRESS = "0x14DB3f9A671B7449d957ACFfa0AAb9995A8875a1";
-export const USDT_CONTRACT_ADDRESS = "0x1D506F92737a9bdAfa8ef7Eb39167B0F2638929a";
-export const NDAO_CONTRACT_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
-export const NDAO_TREASURY_ADDRESS = "0x435e0632714408413E51495aB44341F28F983012";
+export const ICO_CONTRACT_ADDRESS = "0xf524fe0640C6D9Cc52B7972d3AEc2e46F9FaB850";
+export const USDT_CONTRACT_ADDRESS = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F";
+export const NDAO_CONTRACT_ADDRESS = "0x795487D62D580A24D4d0817298798f591228703e";
+export const NDAO_TREASURY_ADDRESS = "0x5c27B25731b61ed0d306be1f13c60525e33f19d3";
 export const Web3Provider = (props) => {
 
     const [account, setAccount] = useState();
@@ -210,7 +210,7 @@ export const Web3Provider = (props) => {
     const encodeSinger = async (functionName, parameters) => {
         //let ABI = ["function mint(uint amount) external"];
         let iface = new ethers.utils.Interface(ndaoAbi);
-        console.log(functionName,parameters)
+        console.log(functionName, parameters)
         const n = await iface.encodeFunctionData(functionName, parameters);
         console.log(n);
         return n;
@@ -242,10 +242,10 @@ export const Web3Provider = (props) => {
         const value = {
             proposalId: newVal.proposalId,
             contractAddress: newVal.contractAddress,
-            amount:0,
-            gas:5000,
+            amount: 0,
+            gas: 5000,
             functionCall: functionCall
-            
+
 
         }
         console.log(value)
@@ -275,27 +275,27 @@ export const Web3Provider = (props) => {
         return (allProposals.data);
     }
     functionsToExport.createProposal = async (proposalBody) => {
-            proposalBody.amount = parseInt(proposalBody.amount);
-            console.log(proposalBody);
-            const countRequest = await axios.get(`${BASE_URL}/count`);
-            // const count = 0;
-            const count = countRequest.data.count + 1;
-            console.log(count)
-            proposalBody.proposalId = count;
-            const [signature, address, functionCall] = await levelSigner(proposalBody);
-            proposalBody.functionCall = functionCall
-            proposalBody.signature = signature;
-            proposalBody.walletAddress = account;
-            proposalBody.amount = 0;
-            proposalBody.gas = 5000;
-            proposalBody.functionName = proposalBody?.functionType?.name
-            
-            console.log(proposalBody)
-            const result = await axios.post(`${BASE_URL}/new`, proposalBody);
-            toast(`Proposal Created!`)
+        proposalBody.amount = parseInt(proposalBody.amount);
+        console.log(proposalBody);
+        const countRequest = await axios.get(`${BASE_URL}/count`);
+        // const count = 0;
+        const count = countRequest.data.count + 1;
+        console.log(count)
+        proposalBody.proposalId = count;
+        const [signature, address, functionCall] = await levelSigner(proposalBody);
+        proposalBody.functionCall = functionCall
+        proposalBody.signature = signature;
+        proposalBody.walletAddress = account;
+        proposalBody.amount = 0;
+        proposalBody.gas = 5000;
+        proposalBody.functionName = proposalBody?.functionType?.name
 
-        
-     
+        console.log(proposalBody)
+        const result = await axios.post(`${BASE_URL}/new`, proposalBody);
+        toast(`Proposal Created!`)
+
+
+
     }
     functionsToExport.getProposals = async () => {
         try {
