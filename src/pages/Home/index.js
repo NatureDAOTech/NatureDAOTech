@@ -8,7 +8,18 @@ const Home = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             <img src={"/nature_cycle.png"} alt="" className="max-w-xl p-4 lg:p-0 w-full" />            
-                    "Nature Conservation" To "Earn "
+            <p className="text-green-600">"Nature Conservation" To "Earn"                
+                <div className="flex mt-8 justify-center">
+                    <a
+                        target={"_blank"}
+                        href="https://www.youtube.com/watch?v=ymsSes7Dp4Q"
+                        type="button"
+                        className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500"
+                    >
+                        <span>Watch Intro</span>
+                    </a>
+                </div>
+            </p>
             <div style={{ backgroundColor: "#E2FACF" }} className=" w-full p-8 mt-8 ">
                 <p className="mt-1 text-4xl w-full text-center font-semibold sm:tracking-tight ">
                     Mission

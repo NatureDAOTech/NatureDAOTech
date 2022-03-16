@@ -9,6 +9,7 @@ const navigation = {
         // { name: 'Twitter', href: '#' },
         { name: 'Team', link: '/team' },
         { name: 'FAQs', link: '/faq' },
+        { name: 'Sites', link: '/site' },
     ],
     social: [
 
@@ -57,6 +58,12 @@ const navigation = {
         },
 
     ],
+    legal: [
+        { name: 'Privacy', link: '/privacy' },
+        { name: 'Cookie', link: '/cookie' },
+        { name: 'Disclaimer', link: '/disclaimer' },
+        { name: 'Terms', link: '/terms' },
+    ],
 }
 
 export default function Footer() {
@@ -79,6 +86,17 @@ export default function Footer() {
                             <item.icon className="h-6 w-6" aria-hidden="true" />
                         </a>
                     ))}
+                </div>
+                <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+                <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                    {navigation.legal.map((item) => (
+                        <div key={item.name} className="px-3">
+                            <a target={item.href?"_blank":""} href={item.href||item.link} className="text-lg text-white hover:text-gray-900">
+                                {item.name}
+                            </a>
+                        </div>
+                    ))}
+                </nav>
                 </div>
             </div>
         </footer>

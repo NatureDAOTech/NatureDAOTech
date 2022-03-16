@@ -4,6 +4,11 @@ import { ChevronDownIcon } from '@heroicons/react/outline'
 
 const faqs = [
     {
+        question: "Why Blockchain and DAO?",
+        answer:
+            "To avoid fixed office cost as we are using a public network accessible anywhere in the world to scale up. Also, avoid need for HR, Regulatory, legal departments as blockchain and DAO fundamentals on which NatureDAO is based inherently fulfil these requirements."
+    },
+    {
         question: "What if crypto mining goes out of business and people can run validators on their mobile devices?",
         answer:
             "By then NatureDAO and NGOs will be already having matured partnership. This partnership can work on supporting the requirements of current and next generation blockchain, Defis and DAOs. We’ve plans to introduce microfinance with communities engaged on NDAO to further enhance nature restoration operations.",

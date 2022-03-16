@@ -18,7 +18,7 @@ const navigation = [
     { name: 'Docs', href: 'https://docs.naturedao.tech/', current: false },
     { name: 'Team', link: '/team', current: false },
     { name: 'FAQ', link: '/faq', current: false },
-    // { name: 'Profile', href: '#', current: false },
+    { name: 'Sites', link: '/site', current: false },
     // { name: 'Calendar', href: '#', current: false },
 ]
 const userNavigation = [

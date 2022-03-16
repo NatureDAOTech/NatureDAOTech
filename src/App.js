@@ -12,6 +12,11 @@ import NewProposal from "pages/NewProposal/index";
 import AllProposals from "pages/AllProposals/index";
 import Team from "pages/Team/index";
 import FAQ from "pages/FAQ/index";
+import Site from "pages/Site/index";
+import Privacy from "pages/Privacy/index";
+import Cookie from "pages/Cookie/index";
+import Disclaimer from "pages/Disclaimer/index";
+import Terms from "pages/Terms/index";
 import HomeNavbar from "components/HomeNavbar";
 
 function App() {
@@ -32,6 +37,11 @@ function App() {
             <Route path="/app/*" element={<ICO />} />
             <Route path="/team" element={<Team />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/site" element={<Site />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/cookie" element={<Cookie />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/" element={<Home />} />
           </Routes>
           <Footer />
