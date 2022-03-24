@@ -15,7 +15,7 @@ const user = {
 }
 const navigation = [
     { name: 'ICO', link: '/app/ico', current: false },
-    // { name: 'Proposals', link: '/app/proposals', current: false },
+    { name: 'Proposals', link: '/app/proposals', current: false },
     // { name: 'Profile', href: '#', current: false },
     // { name: 'Calendar', href: '#', current: false },
 ]

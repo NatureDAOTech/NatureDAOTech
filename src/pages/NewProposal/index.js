@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 const FUNCTION_TYPES = [
     {
         index: 0,
+        DisplayText: "Decommission Site",
         name: "burn",
         params: [
             { name: "amount", type: "wei" }
@@ -15,6 +16,7 @@ const FUNCTION_TYPES = [
     },
     {
         index: 1,
+        DisplayText: "Raise new token mint request for new Site",
         name: "mintTokens",
         params: [
             { name: "address_to", type: "address" },
@@ -24,6 +26,7 @@ const FUNCTION_TYPES = [
     },
     {
         index: 2,
+        DisplayText: "Set Core Team Member",
         name: "setCoreTeam",
         params: [
             { name: "_VestingAddress", type: "address" }
@@ -31,16 +34,10 @@ const FUNCTION_TYPES = [
     },
     {
         index: 3,
+        DisplayText: "Set signer for community treasury",
         name: "setCT",
         params: [
             { name: "_CTAddress", type: "address" }
-        ]
-    },
-    {
-        index: 4,
-        name: "setGI",
-        params: [
-            { name: "_GIAddress", type: "address" }
         ]
     },
 ]
@@ -64,7 +61,7 @@ const NewProposal = ({ }) => {
                 <div className="md:col-span-1">
                     <div className="px-4 sm:px-0">
                         <h3 className="text-lg font-medium leading-6 text-gray-900">Create a new Proposal</h3>
-                        <p className="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
+                        <p className="mt-1 text-sm text-gray-600"></p>
                     </div>
                 </div>
                 <div className="mt-5 md:mt-0 md:col-span-2">
@@ -117,7 +114,7 @@ const NewProposal = ({ }) => {
                                                         newVal[index] = ee.target.value
                                                         handleUpdate("functionParams", newVal)
                                                     }}
-                                                    name={e.name}
+                                                    name={e.DisplayText}
                                                     id={e.name}
                                                     className="mt-1 p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                 />

@@ -16,7 +16,7 @@ export default function Privacy() {
                         1.2 References in this Agreement to “NATURE DAO”, “we”, “our” and “us” are to NATURE DAO. References to “you” or “your” are to the person with whom NATURE DAO enters into this Agreement.
                     </p>
                     <p className="w-full p-2">
-                    1.3 By accessing any areas on our website (including www.NATUREdao.tech), applications, exchanges, wallets, platforms and software (collectively, “Sites”) and signing up of any accounts therein (where applicable), you agree that you have read, understood and accepted all the terms and conditions contained in this Agreement (“Terms”), save where expressly provided for specifically in each of the Sites (of which the latter shall take precedence).
+                    1.3 By accessing any areas on our website (including www.naturedao.tech), applications, exchanges, wallets, platforms and software (collectively, “Sites”) and signing up of any accounts therein (where applicable), you agree that you have read, understood and accepted all the terms and conditions contained in this Agreement (“Terms”), save where expressly provided for specifically in each of the Sites (of which the latter shall take precedence).
                     </p>
                     <p className="w-full p-2">
                     1.4 You should be aware that the risk of loss in trading or holding digital currencies can be substantial. As with any asset, the value of digital currencies can fluctuate and there can be a substantial risk that you lose money buying, selling, holding, or investing in digital currencies.
@@ -316,7 +316,7 @@ export default function Privacy() {
                 <p className="w-full p-4">
                 16. CONTACT
                     <p className="w-full p-2">
-                    16.1 If you have any feedback, questions, or complaints, contact us as provided below: Email: sunil.patil@NATUREdao.tech Attention it to the “Data Privacy Officer” Office address: 70 Links Way, Croxley Green, Rickmansworth WD3 3RJ Attention it to the “Data Privacy Officer”    
+                    16.1 If you have any feedback, questions, or complaints, contact us as provided below: Email: sunil.patil@naturedao.tech Attention it to the “Data Privacy Officer” Office address: 70 Links Way, Croxley Green, Rickmansworth WD3 3RJ Attention it to the “Data Privacy Officer”    
                     </p>
                     <p className="w-full p-2">
                     16.2 In the event of a complaint, please set out the cause of your complaint, how you would like us to resolve the complaint and any other information you believe to be relevant. A customer complaints officer ("Officer") will consider your complaint. The Officer will consider your complaint without prejudice based on the information you have provided, and any information provided by NATURE DAO.    
