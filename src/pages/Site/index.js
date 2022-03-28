@@ -29,7 +29,7 @@ export default function Site() {
     return (
         <div className="bg-white">            
             <div className="flex flex-col items-center justify-center">
-                <img src={"/UnitOfExecution.png"} alt="" className="" />            
+                <img src={"/unitofexecution.png"} alt="" className="" />            
                 <p className="text-green-600">Building blocks of the Unit of Execution at an NGO's site
                     <div className="flex mt-8 justify-center">
                         <a
