@@ -27,7 +27,22 @@ const sites = [
 
 export default function Site() {
     return (
-        <div className="bg-white">
+        <div className="bg-white">            
+            <div className="flex flex-col items-center justify-center">
+                <img src={"/UnitOfExecution.png"} alt="" className="" />            
+                <p className="text-green-600">Building blocks of the Unit of Execution at an NGO's site
+                    <div className="flex mt-8 justify-center">
+                        <a
+                            target={"_blank"}
+                            href="https://www.youtube.com/watch?v=ymsSes7Dp4Q"
+                            type="button"
+                            className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-500"
+                        >
+                            <span>Watch Intro</span>
+                        </a>
+                    </div>
+                </p>
+            </div>
             <div className="max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24">
                 <div className="space-y-12">
                     <div className="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
