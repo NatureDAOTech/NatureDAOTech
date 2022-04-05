@@ -6,7 +6,7 @@ const faqs = [
     {
         question: "Why Blockchain and DAO?",
         answer:
-            "To avoid fixed office cost as we are using a public network accessible anywhere in the world to scale up. Also, avoid need for HR, Regulatory, legal departments as blockchain and DAO fundamentals on which NatureDAO is based inherently fulfil these requirements."
+            "Blockchain features a. Immutable, transparent data storage b.Decentralized, no need for intermediaries c. Resistant against malicious participants d. Open to everyone. These features are synergic to work with NGOs and nature preservation and conservation"
     },
     {
         question: "What if crypto mining goes out of business and people can run validators on their mobile devices?",
@@ -16,7 +16,7 @@ const faqs = [
     {
         question: "How it is different than existing DAOs e.g. klimadao&Toucan which are also working for climate change?",
         answer:
-            "To be honest, we started work on climate change and sustainable living in Mid-2020 much before than these DAOs. Nature DAO is working on very specific use case of engaging local NGOs to bring them on Defi. We’ve very specific roadmap with starting point is running mining sites with renewable energy. Many DAOs work on bond, stake and sell (3,3) mechanism where we’re planning to work on revenue generation model by engaging NGOs. So rather than creating bridge with 3rd party carbon credit agencies, we directly link our carbon offset to our crypto revenue. We have a model which a general investor can understand and participate without complexity and 3rd party / intermediaries involvements. ",
+            "Nature DAO is working on very specific use case of engaging local NGOs to bring them on Defi. We’ve very specific roadmap with starting point is running mining sites with renewable energy. Many DAOs work on bond, stake and sell (3,3) mechanism where we’re planning to work on revenue generation model by engaging NGOs. We directly link our carbon offset to our crypto revenue. We have a model which a general investor can understand and participate without complexity and 3rd party / intermediaries involvements. ",
     },
     {
         question: "How this plan will be implemented?",
